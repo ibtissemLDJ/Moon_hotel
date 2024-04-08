@@ -4,8 +4,8 @@ public class Date {
 	private int day ;
 	private int month ;
 	private int  year ;
-	public Date ( int day , iint month ,int year )throws IllegalArgumentException{
-	    if (!isNotValidDate(day,month,year)) throw new IllegalArgumentException("this date is not valid.");
+	public Date ( int day , int month ,int year )throws IllegalArgumentException{
+	    if (!isValidDate(day,month,year)) throw new IllegalArgumentException("this date is not valid.");
 	    this.day = day ;
 	    this.month= month ; 
 	    this.year = year ;
@@ -34,21 +34,21 @@ public class Date {
 	    if (isValidDate(day, this.month, this.year)){
 	        this.day= day;
 	    }else{
-	        throw IllegalArgumentException("YOU PROVIDED AN INVALIDE DAY");
+	        throw new IllegalArgumentException("YOU PROVIDED AN INVALIDE DAY");
 	    }
 	}
 	public void setMonth(int month) {
 	    if (isValidDate(this.day, month, this.year)){
 	        this.month= month;
 	    }else{
-	        throw IllegalArgumentException("YOU PROVIDED AN INVALIDE MONTH");
+	        throw new IllegalArgumentException("YOU PROVIDED AN INVALIDE MONTH");
 	    }
 	}
 	public void setYear(int year) {
 	    if (isValidDate(this.day, this.month,year)){
 	        this.year=year;
 	    }else{
-	        throw IllegalArgumentException("YOU PROVIDED AN INVALIDE YEAR");
+	        throw new IllegalArgumentException("YOU PROVIDED AN INVALIDE YEAR");
 	    }
 	}
 	public String toString() {
