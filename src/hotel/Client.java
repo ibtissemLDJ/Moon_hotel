@@ -7,8 +7,6 @@ import java.util.Scanner;
 public abstract class Client extends User{
 	private String Adress;
     public static int idClient;
-    private HashMap<Integer,Reservation> inforeservation = new HashMap<>();
-    private HashMap<String, Client> clients = new HashMap<>();
     private HashMap<Integer,String> Commentaire = new HashMap<>();
 public Client(String name, String lastName, String email, String password, String phonenumber, String Adress) {
 	super(name, lastName, email, password, phonenumber);
@@ -24,10 +22,9 @@ public void setAdress(String adress) {
 	Adress = adress;
 }
 public void saisirReservation(int anneed,int moisd,int jourd,int anneef,int moisf,int jourf, String typeChambre, int nombrePersonnes, String typePersonne) {
-    // Utilisation d'un scanner pour saisir les informations
+
     Scanner scanner = new Scanner(System.in);
 
-    // Saisie des informations de la réservation
     System.out.println("Entrez l'année de debut de la réservation  : ");
     anneed = scanner.nextInt();
     System.out.println("Entrez le mois de debut de la réservation  : ");
@@ -44,7 +41,7 @@ public void saisirReservation(int anneed,int moisd,int jourd,int anneef,int mois
     typeChambre = scanner.nextLine();
     System.out.println("Entrez le nombre de personnes : ");
     nombrePersonnes = scanner.nextInt();
-    scanner.nextLine(); // Ignorer la fin de la ligne
+    scanner.nextLine(); 
     System.out.println("Entrez le type de personne (adultes, enfants) : ");
     typePersonne = scanner.nextLine();
     
@@ -55,18 +52,23 @@ public void leaveComment(int idClient,String c) {
 	System.out.println("le commentaire du client sur l'hotel est" + c);
 }
 public void getReservations(int idClient) {
-            clients.get(idClient);
-	inforeservation.get(idClient);
+            main.clients.get(idClient);
+	main.inforeservation.get(idClient);
 }
 @Override
 public void signUpClient(int id, String name, String lastName, String email, String password, String phonenumber,
-		String Adress) {
+		String Adress) throws AlreadyExistException {
 	// TODO Auto-generated method stub
-	if (clients.containsKey(id)){
+	if (main.clients.containsKey(id)){
 	    throw new AlreadyExistException();
 	  }else {
-	    Client client = new Client(ID ,name,lastName,email,password,phonenumber,Adress);
-	    clients.put(ID,client);
+          ID=id;
+          this.name= name ; 
+          this.lastName = lastName ;
+          this.email = email ;
+          this.password = password; 
+          this.phonenumber = phonenumber;
+	    main.clients.put(ID,this);}
 }
 
 @Override
@@ -75,7 +77,7 @@ public void signInClient(String email, String password) throws ForgetPasswordExc
 	Client client;
     boolean found = false;
 
-    for (Map.Entry<Integer, Client> entry : Clients.entrySet()) {
+    for (Map.Entry<Integer, Client> entry : main.clients.entrySet()) {
         client = entry.getValue();
         if (client.getEmail().equals(email)) { 
             found = true;

@@ -1,11 +1,11 @@
 package hotel;
 
 public abstract  class User {
-	 private String name;
-	  private String lastName;
-	  private String email;
-	  private String password;
-	  private String phonenumber;
+	 protected String name;
+	protected  String lastName;
+	  protected String email;
+	  protected String password;
+	  protected String phonenumber;
 	  public static int ID =0;
 	  
 	  public User(String name, String lastName, String email, String password, String phonenumber) {
