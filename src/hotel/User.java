@@ -16,7 +16,12 @@ public abstract  class User {
 		this.password = password;
 		this.phonenumber = phonenumber;
 	  }
-
+      public int getID() {
+    	  return ID; 
+      }
+      public void setID(int id ) {
+    	  ID= id;
+      }
 	  public String getName() {
 		return name;
 	  }
@@ -47,8 +52,6 @@ public abstract  class User {
 	  public void setPhonenumber(String phonenumber) {
 		this.phonenumber = phonenumber;
 	  }
-	  public abstract User signUp( );
-	  public abstract User signIn() ;
 		  
 	  
 	  public void recoverPasswordByEmail(String email) {

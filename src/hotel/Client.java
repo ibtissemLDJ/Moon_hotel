@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public abstract class Client extends User{
+public  class Client extends User{
 	private String Adress;
     public static int idClient;
     private HashMap<Integer,String> Commentaire = new HashMap<>();
@@ -62,7 +62,7 @@ public void signUpClient(int id, String name, String lastName, String email, Str
 	if (main.clients.containsKey(id)){
 	    throw new AlreadyExistException();
 	  }else {
-          ID=id;
+		  idClient=id;
           this.name= name ; 
           this.lastName = lastName ;
           this.email = email ;

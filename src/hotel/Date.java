@@ -1,9 +1,9 @@
 package hotel;
 
 public class Date {
-	private int day ;
-	private int month ;
-	private int  year ;
+	protected  int day ;
+	protected int month ;
+	protected int  year ;
 	public Date ( int day , int month ,int year )throws IllegalArgumentException{
 	    if (!isValidDate(day,month,year)) throw new IllegalArgumentException("this date is not valid.");
 	    this.day = day ;
