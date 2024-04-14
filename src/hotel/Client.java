@@ -14,6 +14,11 @@ public Client(String name, String lastName, String email, String password, Strin
 	this.Adress=Adress;
 }
 
+public Client() {
+	super ();
+	// TODO Auto-generated constructor stub
+}
+
 public String getAdress() {
 	return Adress;
 }
@@ -52,14 +57,14 @@ public void leaveComment(int idClient,String c) {
 	System.out.println("le commentaire du client sur l'hotel est" + c);
 }
 public void getReservations(int idClient) {
-            main.clients.get(idClient);
-	main.inforeservation.get(idClient);
+            Main.clients.get(idClient);
+	Main.infoReservation.get(idClient);
 }
 @Override
 public void signUpClient(int id, String name, String lastName, String email, String password, String phonenumber,
 		String Adress) throws AlreadyExistException {
 	// TODO Auto-generated method stub
-	if (main.clients.containsKey(id)){
+	if (Main.clients.containsKey(id)){
 	    throw new AlreadyExistException();
 	  }else {
 		  idClient=id;
@@ -68,7 +73,7 @@ public void signUpClient(int id, String name, String lastName, String email, Str
           this.email = email ;
           this.password = password; 
           this.phonenumber = phonenumber;
-	    main.clients.put(ID,this);}
+	    Main.clients.put(ID,this);}
 }
 
 @Override
@@ -77,7 +82,7 @@ public void signInClient(String email, String password) throws ForgetPasswordExc
 	Client client;
     boolean found = false;
 
-    for (Map.Entry<Integer, Client> entry : main.clients.entrySet()) {
+    for (Map.Entry<Integer, Client> entry : Main.clients.entrySet()) {
         client = entry.getValue();
         if (client.getEmail().equals(email)) { 
             found = true;

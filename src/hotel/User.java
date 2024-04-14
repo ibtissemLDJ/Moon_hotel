@@ -16,7 +16,10 @@ public abstract  class User {
 		this.password = password;
 		this.phonenumber = phonenumber;
 	  }
-      public int getID() {
+      public User() {
+		// TODO Auto-generated constructor stub
+	}
+	public int getID() {
     	  return ID; 
       }
       public void setID(int id ) {

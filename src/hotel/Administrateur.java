@@ -23,7 +23,7 @@ public void setSalary(double salary) {
   
 
 public void verifierReservation(String ID ) {
-    for (Map.Entry<String, HashMap<String, Date[]>> e: main.reservations.entrySet()) {
+    for (Map.Entry<String, HashMap<String, Date[]>> e: Main.reservations.entrySet()) {
         Map <String , Date []> map = new HashMap () ;
         map = e.getValue();
         if (map.containsKey(ID)) { //si hashmap contient ID du client
@@ -38,15 +38,15 @@ public void verifierReservation(String ID ) {
 public double calculateTotalPrice(Date deb , Date fin , String typeRoom) {
     double price = 0;
     int nbrJours = deb.toNumberOfNights(deb, fin);
-    if (typeRoom.equals ("single")) price = main.price1;
-    else if (typeRoom.equals ("double")) price = main.price2;
-    else if (typeRoom.equals ("triple")) price = main.price3;
-    else if (typeRoom.equals ("suite")) price = main.price4;
+    if (typeRoom.equals ("single")) price = Main.price1;
+    else if (typeRoom.equals ("double")) price = Main.price2;
+    else if (typeRoom.equals ("triple")) price = Main.price3;
+    else if (typeRoom.equals ("suite")) price = Main.price4;
     return price*nbrJours ;
 }
   
 public int checkAvailableRoomDate(String typeRoom , Date dateDebut , Date dateFin ) {//methode pour verifier la date chpisit par le client est disponible
-    for (Entry<String, HashMap<String, Date[]>> e1: main.reservations.entrySet()) {//parcourir la hashmap externe 
+    for (Entry<String, HashMap<String, Date[]>> e1: Main.reservations.entrySet()) {//parcourir la hashmap externe 
         if ( e1.getKey().startsWith(typeRoom)){ //si la cle commence par le type de la chambre demande
             String numRoom1 = (e1.getKey()).replaceAll("\\D", "");//
             int numRoom2 = Integer.parseInt(numRoom1);
@@ -86,7 +86,7 @@ public void ajouterReservation(String ID ,String type, Date debut , Date fin) {
         String cle = type.concat(numberRoom); //former la cle en concatinant le type et le num de la chambre
         //ajouter la reservation 
         Date[] tab = { debut , fin }; //creer un tableau avec la date de resrvation
-        main.reservations.get(cle).put(ID, tab); //ajouter le tableau au hashmap 
+        Main.reservations.get(cle).put(ID, tab); //ajouter le tableau au hashmap 
     } else{
         System.out.println("Nous excusons, pas de chambres libres pour cette date"); 
     }
@@ -95,56 +95,56 @@ public void ajouterReservation(String ID ,String type, Date debut , Date fin) {
 public void anullerReservation(String ID , int numRoom, String typeRoom){
     String  numberRoom = String.valueOf(numRoom);
     String cle = typeRoom.concat(numberRoom);
-    if (main.reservations.containsKey(cle)) {
-        main.reservations.get(cle).remove(ID);
+    if (Main.reservations.containsKey(cle)) {
+        Main.reservations.get(cle).remove(ID);
     } 
 }
   
 public void modifierReservation(String ID , int numRoom, String typeRoom, Date nouvDateDeb , Date nouvDateFin) {
     String  numberRoom = String.valueOf(numRoom);
     String cle = typeRoom.concat(numberRoom);
-    if (main.reservations.containsKey(cle)) {
+    if (Main.reservations.containsKey(cle)) {
         //il faut verifier si la nouvelle date existe deja 
         HashMap<String , Date[]> map2 = new HashMap();
-        map2=  main.reservations.get(cle);
+        map2=  Main.reservations.get(cle);
         Date [] tab2 ;
         for (Entry<String, Date[]> e3: map2.entrySet()) {
             tab2= e3.getValue();
         }
         Date [] tab = { nouvDateDeb , nouvDateFin} ;
-        main.reservations.get(cle).put(ID, tab);
+        Main.reservations.get(cle).put(ID, tab);
     }
 }
   
 public void addRoom(Chambre chmbr) {
-    if (main.reservations.containsKey(chmbr.getNumber_chambre())) {//verifier si cette chambre existe deja avant de la creer
+    if (Main.reservations.containsKey(chmbr.getNumber_chambre())) {//verifier si cette chambre existe deja avant de la creer
         System.out.println("Cette chambre existe deja !!");
-    }else main.chambres.put(chmbr.getNumber_chambre(), chmbr);
+    }else Main.chambres.put(chmbr.getNumber_chambre(), chmbr);
 }
 
 public void removeRoom(Chambre chmbr) {
     if (reservedRoom(chmbr.getType() , chmbr.getNumber_chambre()) == false)  {
-        main.chambres.remove(chmbr.getNumber_chambre());
+        Main.chambres.remove(chmbr.getNumber_chambre());
     } 
 }
 
 public void addClient(Client clint) {
-    if (main.clients.containsKey(clint.getID())) {// verifier si le client existe deja 
+    if (Main.clients.containsKey(clint.getID())) {// verifier si le client existe deja 
         System.out.println("Ce client a deja une reservation !!");
-    }else main.clients.put(clint.getID(), clint);
+    }else Main.clients.put(clint.getID(), clint);
 }
   
 public void removeClient (Client clint ) {
-    main.clients.remove(clint.getID());
+    Main.clients.remove(clint.getID());
 }
   
 public Client findClient(String ID) {
-    Client client = main.clients.get(ID);
+    Client client = Main.clients.get(ID);
     return client ;
 }
   
 public Chambre findRoom(int nbrRoom) {
-    Chambre chmbr = main.chambres.get(nbrRoom);
+    Chambre chmbr = Main.chambres.get(nbrRoom);
     return chmbr ;
 }
   
@@ -152,7 +152,7 @@ public boolean reservedRoom (String type ,int numRoom) { //methode pour verifier
     String  numberRoom = String.valueOf(numRoom);
     String cle = type.concat(numberRoom);
     HashMap <String , Date[]> map = new HashMap<String, Date[]> ();
-    map = main.reservations.get(cle);
+    map = Main.reservations.get(cle);
     if(map.isEmpty()) return false ;
     else return true ;
 }
@@ -161,7 +161,7 @@ public void signInAdmin(String email, String password) throws ForgetPasswordExce
     Administrateur admin;
     boolean found = false;
 
-    for (Entry<Integer, Administrateur> entry : main.administrateurs.entrySet()) {
+    for (Entry<Integer, Administrateur> entry : Main.administrateurs.entrySet()) {
         admin = entry.getValue();
 
         found = true;
@@ -178,7 +178,7 @@ public void signInAdmin(String email, String password) throws ForgetPasswordExce
 }
 public void signUpAdmin(int id ,String name, String lastName, String email, String password, String phonenumber, double salary)throws AlreadyExistException,NotAdminException{
  if (password.equals("3365990-85462344")) {
-	 if (main.administrateurs.containsKey(id)) {
+	 if (Main.administrateurs.containsKey(id)) {
 		 throw new AlreadyExistException();
 	 }else {
 		 ID= id; 
@@ -188,7 +188,7 @@ public void signUpAdmin(int id ,String name, String lastName, String email, Stri
 		 this.password= password;
 		 this.phonenumber= phonenumber;
 		 this.salary= salary;
-		 main.administrateurs.put(id, this);
+		 Main.administrateurs.put(id, this);
 	 }
  }else throw new NotAdminException();
 }
