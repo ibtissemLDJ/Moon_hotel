@@ -8,7 +8,7 @@ public abstract  class User {
 	  protected String phonenumber;
 	  public static int ID =0;
 	  
-	  public User(String name, String lastName, String email, String password, String phonenumber) {
+	  public User(String name, String lastName, String email, String password,String phonenumber) {
 		ID++;
 		  this.name = name;
 		this.lastName = lastName;
@@ -16,10 +16,10 @@ public abstract  class User {
 		this.password = password;
 		this.phonenumber = phonenumber;
 	  }
-      public User() {
-		// TODO Auto-generated constructor stub
-	}
-	public int getID() {
+	  public User() {
+		  
+	  }
+      public int getID() {
     	  return ID; 
       }
       public void setID(int id ) {
@@ -61,17 +61,16 @@ public abstract  class User {
 		  
 	  }
 	  
-	  public void signUpClient(int id, String name, String lastName, String email, String password, String phonenumber,String Adress)throws AlreadyExistException {
+	  public  void signUpClient(int id, String name, String lastName, String email, String password, String phonenumber,String Adress)throws AlreadyExistException {
 	  }
 	  public void signUpAdmin(int id ,String name, String lastName, String email, String password, String phonenumber,boolean active, double salary)throws AlreadyExistException,NotAdminException{
 	}
 
 
-	  public void signInClient(String email, String password) throws ForgetPasswordException, DoesntExistException {
-		  
+	 
+	  public  void signInAdmin(String email, String password) throws ForgetPasswordException, DoesntExistException {
 	  }
-	  public void signInAdmin(String email, String password) throws ForgetPasswordException, DoesntExistException {
-	  }
+	
 }
 	/*public void signUpClient(int id, String name, String lastName, String email, String password, String phonenumber,String Adress)Throws AlreadyExist {
 	  if (Main.Clients.containsKey(id)){
